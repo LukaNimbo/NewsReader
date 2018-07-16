@@ -1,6 +1,6 @@
 package in.nimbo.luka;
 
-import in.nimbo.luka.configs.Config;
+import in.nimbo.luka.Config;
 import in.nimbo.luka.utils.Constants;
 
 import java.io.*;

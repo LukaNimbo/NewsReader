@@ -1,4 +1,4 @@
-package in.nimbo.luka.configs;
+package in.nimbo.luka;
 
 
 import java.util.Set;

@@ -1,11 +1,11 @@
 package in.nimbo.luka;
+import in.nimbo.luka.database.DBHandler;
+import in.nimbo.luka.utils.Constants;
 
-import in.nimbo.luka.configs.Config;
-
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
 
 /**
  * Hello world!
@@ -13,29 +13,53 @@ import java.util.Set;
  */
 public class App {
     public static void main( String[] args ) {
-//        System.out.println("[START]\n");
-//        RSSReader rssReader = new RSSReader();
-//        String link = "http://rss.cnn.com/rss/edition_world.rss";
-//        URL url = null;
-//
-//        try {
-//            url = new URL(link);
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        rssReader.read(url);
-//
-        ConfHandler confHandler = ConfHandler.getInstance();
-//        confHandler.getConfig("www.tabnak.ir");
 
-        Set<String> set = new HashSet<>();
-        set.add(".gutter_news > div.body1");
-        set.add(".gutter_news > div.body2");
+//        new NewsReader();
+        testDB();
+//        testRSSReader();
+//        testReadConfigFiles();
+    }
 
-        Config config = new Config(".gutter_news > div.body", set);
-        confHandler.add(config, "www.alef.ir");
 
+    private static void testDB() {
+
+        System.out.println("[DATABASE-TEST] -> START");
+        DBHandler dbHandler =  DBHandler.getInstance();
+        dbHandler.setup();
+        System.out.println("[DATABASE-TEST] -> FINISHED");
 
     }
+
+    private static void testRSSReader() {
+        System.out.println("[TEST-RSSParser]");
+
+        RSSParser rssReader = new RSSParser();
+        String link = "http://rss.cnn.com/rss/edition_world.rss";
+        URL url = null;
+
+        try {
+            url = new URL(link);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        rssReader.parse(url, null);
+    }
+
+    private static void testReadConfigFiles() {
+        File folder = new File(Constants.CONFIG_DIRECTORY);
+        File[] listOfFiles = folder.listFiles();
+        ArrayList<String> configFileNames = new ArrayList<>();
+
+        for (int i = 0; i < listOfFiles.length; i++) {
+            if (listOfFiles[i].isFile()) {
+                String filename = listOfFiles[i].getName();
+                configFileNames.add(filename.substring(0, filename.lastIndexOf('.')));
+            }
+        }
+
+        for (String fileName: configFileNames)
+            System.out.println(fileName);
+    }
+
 }
