@@ -1,9 +1,15 @@
 package in.nimbo.luka;
 
-import in.nimbo.luka.Config;
-
 import java.io.IOException;
 import java.net.URL;
+
+/**
+ * we used Jsoup library that give this possibility
+ * to us to get html file of a site and parse that
+ * with given css query selector
+ *
+ * @author nadi
+ */
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -23,6 +29,17 @@ public class XMLParser {
     public XMLParser(){
 
     }
+
+    /**
+     *
+     * @param url is link of one news of News Site that we want to
+     *            get the context of that.
+     * @param config is unique file that defines where we search the
+     *               context of news in the html file of site.
+     * @return context of a news of site
+     *
+     * @author nadi
+     */
 
     public String parse(URL url, Config config) {
         Document document = null;
