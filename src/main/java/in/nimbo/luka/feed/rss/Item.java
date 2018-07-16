@@ -3,6 +3,10 @@ package in.nimbo.luka.feed.rss;
 
 import java.util.Date;
 
+/**
+ * Every entry of RSS convert to Item.
+ * @author reza
+ */
 public class Item {
     private String title;
     private String link;
