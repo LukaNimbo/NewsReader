@@ -17,16 +17,16 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
- * XMLParser Class, get a URL and a Config and then
+ * HTMLParser Class, get a URL and a Config and then
  * get the HTML file of that url link and return the
  * context of that link in output.
  *
  * @author nadi
  */
 
-public class XMLParser {
+public class HTMLParser {
 
-    public XMLParser(){
+    public HTMLParser(){
 
     }
 
