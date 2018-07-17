@@ -6,6 +6,8 @@ import java.util.Set;
 public class SiteConfig {
     private String bodyPattern;
     private Set<String> adPatterns;
+    private String link;
+
     public SiteConfig(String bodyPattern, Set<String> adPatterns){
         this.bodyPattern = bodyPattern;
         this.adPatterns = adPatterns;
