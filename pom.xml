@@ -23,6 +23,8 @@
     <mysql.version>5.1.6</mysql.version>
     <junit.version>4.11</junit.version>
     <cliche.version>110413</cliche.version>
+    <hikariPC.version>3.1.0</hikariPC.version>
+
 
 
   </properties>
@@ -65,6 +67,12 @@
       <artifactId>cliche</artifactId>
       <version>${cliche.version}</version>
     </dependency>
+
+    <dependency>
+    <groupId>com.zaxxer</groupId>
+    <artifactId>HikariCP</artifactId>
+    <version>${hikariPC.version}</version>
+  </dependency>
     
   </dependencies>
 
