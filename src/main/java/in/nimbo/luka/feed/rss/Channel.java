@@ -3,6 +3,14 @@ package in.nimbo.luka.feed.rss;
 import java.net.URL;
 import java.util.List;
 
+/**
+ * Channel is our type for store name and link and description and
+ * list of items in rss in our program
+ *
+ * @author nadi
+ *
+ */
+
 public class Channel {
     private String name;
     private URL url;

@@ -17,10 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RSSParser {
-    private XMLParser xmlParser;
+    private HTMLParser HTMLParser;
 
     public RSSParser(){
-        xmlParser = new XMLParser();
+        HTMLParser = new HTMLParser();
     }
 
     public Channel parse(URL url, Config config) {
@@ -50,7 +50,7 @@ public class RSSParser {
             item.setPubDate(syndEntry.getPublishedDate());
 
             try {
-                item.setContext(xmlParser.parse(new URL(item.getLink()), config));
+                item.setContext(HTMLParser.parse(new URL(item.getLink()), config));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
