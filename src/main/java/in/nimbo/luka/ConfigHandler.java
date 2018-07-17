@@ -1,6 +1,5 @@
 package in.nimbo.luka;
 
-import in.nimbo.luka.Config;
 import in.nimbo.luka.utils.Constants;
 
 import java.io.*;
@@ -8,14 +7,14 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 
-public class ConfHandler {
-    private ConfHandler(){}
+public class ConfigHandler {
+    private ConfigHandler(){}
 
     private static class SingletonHolder {
-        private static final ConfHandler INSTANCE = new ConfHandler();
+        private static final ConfigHandler INSTANCE = new ConfigHandler();
     }
 
-    public static ConfHandler getInstance() {
+    public static ConfigHandler getInstance() {
         return SingletonHolder.INSTANCE;
     }
 
