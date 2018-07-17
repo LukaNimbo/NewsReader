@@ -1,6 +1,6 @@
 package in.nimbo.luka.database;
 
-import in.nimbo.luka.ConfHandler;
+import in.nimbo.luka.ConfigHandler;
 import in.nimbo.luka.feed.rss.Item;
 import in.nimbo.luka.utils.Constants;
 
@@ -17,7 +17,7 @@ import java.util.Properties;
 
 public class DBHandler {
     private Connection connection;
-    private ConfHandler confHandler;
+    private ConfigHandler confHandler;
 
     private DBHandler() {
 
@@ -59,7 +59,7 @@ public class DBHandler {
 
     private void  initializeAgencies(Statement statement) {
 
-        confHandler = ConfHandler.getInstance();
+        confHandler = ConfigHandler.getInstance();
 
         File folder = new File(Constants.CONFIG_DIRECTORY);
         File[] listOfFiles = folder.listFiles();
