@@ -1,1 +1,0 @@
-TABNAK_NEWS_URL =
