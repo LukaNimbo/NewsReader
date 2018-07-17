@@ -23,7 +23,7 @@ public class RSSParser {
         HTMLParser = new HTMLParser();
     }
 
-    public Channel parse(URL url, Config config) {
+    public Channel parse(URL url, SiteConfig config) {
 
         SyndFeedInput input = new SyndFeedInput();
         SyndFeed feed = null;

@@ -24,10 +24,10 @@ public class ConfigHandler {
      * @param  site the name of website.
      * @return      the config at the specified website.
      */
-    public Config getConfig(String site){
+    public SiteConfig getConfig(String site){
         String path = Constants.CONFIG_DIRECTORY;
         String fileName = site.concat(Constants.CONFIG_EXTENSION);
-        Config config;
+        SiteConfig config;
 
         File directory = new File(path);
         if (!directory.isDirectory()) {
@@ -67,7 +67,7 @@ public class ConfigHandler {
 //                }
 
 
-                config = new Config(bodyPattern, adPatterns);
+                config = new SiteConfig(bodyPattern, adPatterns);
                 return config;
             }
         }
@@ -75,7 +75,7 @@ public class ConfigHandler {
         return null;
     }
 
-    public void add(Config config, String site) {
+    public void add(SiteConfig config, String site) {
 
         String fileName = site.concat(Constants.CONFIG_EXTENSION);
         String filePath = Constants.CONFIG_DIRECTORY.concat(fileName);

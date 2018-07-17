@@ -15,7 +15,7 @@ public class RSSParserTest {
         Properties properties = new Properties();
         properties.load(this.getClass().getClassLoader().getResourceAsStream(""));
         URL url = new URL(properties.get("TABNAK_NEWS_URL").toString());
-        Config config = new Config(".gutter_news > div.body",null);
+        SiteConfig config = new SiteConfig(".gutter_news > div.body",null);
         Channel expected = new Channel();
         Channel output = rssParser.parse(url,config);
         assertEquals (expected,output);

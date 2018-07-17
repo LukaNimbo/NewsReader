@@ -3,10 +3,10 @@ package in.nimbo.luka;
 
 import java.util.Set;
 
-public class Config {
+public class SiteConfig {
     private String bodyPattern;
     private Set<String> adPatterns;
-    public Config(String bodyPattern, Set<String> adPatterns){
+    public SiteConfig(String bodyPattern, Set<String> adPatterns){
         this.bodyPattern = bodyPattern;
         this.adPatterns = adPatterns;
     }

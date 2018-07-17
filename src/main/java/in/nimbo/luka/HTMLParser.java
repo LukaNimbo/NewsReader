@@ -17,7 +17,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 /**
- * HTMLParser Class, get a URL and a Config and then
+ * HTMLParser Class, get a URL and a SiteConfig and then
  * get the HTML file of that url link and return the
  * context of that link in output.
  *
@@ -41,7 +41,7 @@ public class HTMLParser {
      * @author nadi
      */
 
-    public String parse(URL url, Config config) {
+    public String parse(URL url, SiteConfig config) {
         Document document = null;
         try {
             document = Jsoup.connect(url.toString()).get();

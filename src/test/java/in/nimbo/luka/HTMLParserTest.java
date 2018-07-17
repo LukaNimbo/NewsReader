@@ -13,7 +13,7 @@ public class HTMLParserTest {
         Properties properties = new Properties();
         properties.load(this.getClass().getClassLoader().getResourceAsStream("./HTMLParserTest.txt"));
         URL url = new URL(properties.get("TABNAK_NEWS_URL").toString());
-        Config config = new Config(".gutter_news > div.body",null);
+        SiteConfig config = new SiteConfig(".gutter_news > div.body",null);
         String context = htmlParse.parse(url,config);
         System.out.println(properties.get("TABNAK_NEWS_CONTEXT").toString());
         //assertEquals(properties.get("TABNAK_NEWS_CONTEXT").toString(), context);
