@@ -16,8 +16,8 @@ public final class Constants {
      * Database setup section.
      */
     public static final String DATABASE_URL = "jdbc:mysql://localhost/NewsReader";
-    public static final String DATABASE_USER = "reza";
-    public static final String DATABASE_PASSWORD = "root";
+    public static final String DATABASE_USER = "user";
+    public static final String DATABASE_PASSWORD = "pass";
 
 
 
