@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Channel {
     private int id;
-    private int title;
+    private String title;
     private String link;
     private String description;
     private int siteConfigId;
@@ -27,11 +27,11 @@ public class Channel {
         this.id = id;
     }
 
-    public int getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(int title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
