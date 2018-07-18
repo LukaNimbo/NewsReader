@@ -12,29 +12,36 @@ import java.util.List;
  */
 
 public class Channel {
-    private String name;
-    private URL url;
+    private int id;
+    private int title;
+    private String link;
     private String description;
+    private int siteConfigId;
     private List<Item> items;
 
-
-    public URL getUrl() {
-        return url;
+    public int getId() {
+        return id;
     }
 
-    public void setUrl(URL url) {
-        this.url = url;
+    public void setId(int id) {
+        this.id = id;
     }
 
-
-    public String getName() {
-        return name;
+    public int getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(int title) {
+        this.title = title;
     }
 
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
 
     public String getDescription() {
         return description;
@@ -44,6 +51,13 @@ public class Channel {
         this.description = description;
     }
 
+    public int getSiteConfigId() {
+        return siteConfigId;
+    }
+
+    public void setSiteConfigId(int siteConfigId) {
+        this.siteConfigId = siteConfigId;
+    }
 
     public List<Item> getItems() {
         return items;
@@ -52,5 +66,4 @@ public class Channel {
     public void setItems(List<Item> items) {
         this.items = items;
     }
-
 }
