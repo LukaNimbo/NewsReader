@@ -31,18 +31,4 @@ public class SiteConfig {
     }
 
 
-    public void setAdPatterns(Set<String> adPatterns) {
-        this.adPatterns = adPatterns;
-        logger.info("ad pattern added successfully");
-    }
-
-    public void addAdPattern(String adPattern){
-        this.adPatterns.add(adPattern);
-    }
-
-    public void removeAdPattern(String adPattern){
-        if (adPattern.contains(adPattern)){
-            adPatterns.remove(adPattern);
-        }
-    }
 }
