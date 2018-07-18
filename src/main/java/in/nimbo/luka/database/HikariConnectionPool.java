@@ -85,6 +85,8 @@ public class HikariConnectionPool {
     }
 
     public synchronized static void close() {
+        if (getInstance() != null && getInstance().hikariDataSource != null)
+            getInstance().hikariDataSource.close();
     }
 
 }
