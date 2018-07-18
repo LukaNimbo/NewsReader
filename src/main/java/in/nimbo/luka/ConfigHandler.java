@@ -67,7 +67,8 @@ public class ConfigHandler {
 //                }
 
 
-                config = new SiteConfig("", bodyPattern);
+                //TODO: id set 0 incorrect.
+                config = new SiteConfig(0, "", bodyPattern);
                 return config;
             }
         }

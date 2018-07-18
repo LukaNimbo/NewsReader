@@ -4,23 +4,19 @@ import org.slf4j.LoggerFactory;
 
 public class SiteConfig {
     Logger logger = LoggerFactory.getLogger(SiteConfig.class);
+    private int id;
     private String bodyPattern;
     private String link;
 
-    public SiteConfig(String link, String bodyPattern){
+    public SiteConfig(int id, String link, String bodyPattern){
+        this.id = id;
         this.link = link;
         this.bodyPattern = bodyPattern;
     }
 
-    public String getBodyPattern() {
-        return bodyPattern;
-    }
+    public int getId() { return id; }
 
-
-    public void setBodyPattern(String bodyPattern) {
-        this.bodyPattern = bodyPattern;
-        logger.info("Body pattern added successfully");
-    }
+    public void setId(int id) { this.id = id; }
 
     public String getLink() {
         return link;
@@ -29,5 +25,16 @@ public class SiteConfig {
     public void setLink(String link) {
         this.link = link;
     }
+
+    public String getBodyPattern() {
+        return bodyPattern;
+    }
+
+    public void setBodyPattern(String bodyPattern) {
+        this.bodyPattern = bodyPattern;
+        logger.info("Body pattern added successfully");
+    }
+
+
 
 }
