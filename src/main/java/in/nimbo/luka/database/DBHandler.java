@@ -1,6 +1,7 @@
 package in.nimbo.luka.database;
 
 import in.nimbo.luka.ConfigHandler;
+import in.nimbo.luka.SiteConfig;
 import in.nimbo.luka.feed.rss.Item;
 import in.nimbo.luka.utils.Constants;
 
@@ -134,9 +135,19 @@ public class DBHandler {
     }
 
 
-    public void addItem(Item item) {
+    public void addConfig(SiteConfig siteConfig){
+
     }
 
+    public SiteConfig getConfig(String link){
+        SiteConfig siteConfig = null;
+
+        return siteConfig;
+    }
+
+    public void addItem(Item item) {
+
+    }
 
     public void addItems(List<Item> items) {
     }
@@ -144,4 +155,7 @@ public class DBHandler {
     public void addNewsAgency() {
 
     }
+
+
+
 }

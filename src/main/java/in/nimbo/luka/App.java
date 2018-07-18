@@ -1,14 +1,13 @@
 package in.nimbo.luka;
 import in.nimbo.luka.database.DBHandler;
+import in.nimbo.luka.database.HikariConnectionPool;
 import in.nimbo.luka.database.JDBCConnectionPool;
 import in.nimbo.luka.utils.Constants;
 
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
@@ -22,10 +21,46 @@ public class App {
 //        testDB();
 //        testRSSReader();
 //        testReadConfigFiles();
-        testConnectionPool();
+//        testJDBCConnectionPool();
+        testHikariConnectionPool();
     }
 
-    private static void testConnectionPool() {
+    private static void testHikariConnectionPool() {
+
+        HikariConnectionPool hikariConnectionPool = HikariConnectionPool.getInstance();
+
+        Connection connection = null;
+        try {
+            connection = hikariConnectionPool.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        //String SQL_QUERY = "select * from agencies;";
+        String DATABASE_CREATE_TABLE_WHY = "CREATE TABLE why(\n" +
+                "    id int PRIMARY KEY, \n" +
+                "    link VARCHAR(3000),\n" +
+                "    bodyConfig VARCHAR(500)\n" +
+                ");";
+
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(DATABASE_CREATE_TABLE_WHY);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        int resultSet = 0;
+        try {
+            resultSet = preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private static void testJDBCConnectionPool() {
         JDBCConnectionPool pool = new JDBCConnectionPool(
                 "com.mysql.jdbc.Driver", "jdbc:mysql://localhost/test",
                 "user", "pass");

@@ -1,34 +1,33 @@
 package in.nimbo.luka;
-
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Set;
 
 public class SiteConfig {
     Logger logger = LoggerFactory.getLogger(SiteConfig.class);
     private String bodyPattern;
-    private Set<String> adPatterns;
     private String link;
 
-    public SiteConfig(String bodyPattern, Set<String> adPatterns){
+    public SiteConfig(String link, String bodyPattern){
+        this.link = link;
         this.bodyPattern = bodyPattern;
-        this.adPatterns = adPatterns;
     }
 
     public String getBodyPattern() {
         return bodyPattern;
     }
 
-    public Set<String> getAdPatterns() {
-        return adPatterns;
-    }
 
     public void setBodyPattern(String bodyPattern) {
         this.bodyPattern = bodyPattern;
         logger.info("Body pattern added successfully");
     }
 
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
 
 }

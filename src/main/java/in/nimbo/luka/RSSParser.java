@@ -28,7 +28,7 @@ public class RSSParser {
         HTMLParser = new HTMLParser();
     }
 
-    public Channel parse(URL url, SiteConfig config) {
+    public Channel parse(URL url, SiteConfig siteConfig) {
 
         SyndFeedInput input = new SyndFeedInput();
         SyndFeed feed = null;
@@ -61,7 +61,7 @@ public class RSSParser {
             item.setPubDate(syndEntry.getPublishedDate());
 
             try {
-                item.setContext(HTMLParser.getContext(new URL(item.getLink()), config));
+                item.setContext(HTMLParser.getContext(new URL(item.getLink()), siteConfig));
                 logger.info("Item set context successfully");
             } catch (MalformedURLException e) {
                 e.printStackTrace();

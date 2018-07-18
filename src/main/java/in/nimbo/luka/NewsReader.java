@@ -18,5 +18,6 @@ public class NewsReader {
         logger.info("Get instance of database handler successfully.");
         dbHandler.setup();
         logger.info("Set up database handler successfully.");
+
     }
 }

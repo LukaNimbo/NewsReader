@@ -67,7 +67,7 @@ public class ConfigHandler {
 //                }
 
 
-                config = new SiteConfig(bodyPattern, adPatterns);
+                config = new SiteConfig("", bodyPattern);
                 return config;
             }
         }
@@ -75,20 +75,26 @@ public class ConfigHandler {
         return null;
     }
 
-    public void add(SiteConfig config, String site) {
 
-        String fileName = site.concat(Constants.CONFIG_EXTENSION);
+
+
+
+
+
+    public void addConfig(SiteConfig siteConfig) {
+
+        String fileName = siteConfig.getLink().concat(Constants.CONFIG_EXTENSION);
         String filePath = Constants.CONFIG_DIRECTORY.concat(fileName);
 
         Properties confProp = new Properties();
-        confProp.setProperty(Constants.CONFIG_BODY_PATTERN_KEYWORD, config.getBodyPattern());
+        confProp.setProperty(Constants.CONFIG_BODY_PATTERN_KEYWORD, siteConfig.getBodyPattern());
 
         int adIndex = 1;
-        for (String adPattern: config.getAdPatterns()){
-            String property = Constants.CONFIG_AD_PATTERNS_KEYWORD.concat(Integer.toString(adIndex));
-            confProp.setProperty(property, adPattern);
-            adIndex++;
-        }
+//        for (String adPattern: config.getAdPatterns()){
+//            String property = Constants.CONFIG_AD_PATTERNS_KEYWORD.concat(Integer.toString(adIndex));
+//            confProp.setProperty(property, adPattern);
+//            adIndex++;
+//        }
 
         File file = new File(filePath);
         FileOutputStream fileOutputStream = null;
