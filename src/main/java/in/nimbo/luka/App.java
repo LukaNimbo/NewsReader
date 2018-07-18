@@ -14,6 +14,8 @@ import java.util.ArrayList;
  * Hello world!
  *
  */
+
+//TODO: Sonarqube for code review.
 public class App {
     public static void main( String[] args ) {
 
