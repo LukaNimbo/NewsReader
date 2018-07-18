@@ -1,9 +1,13 @@
 package in.nimbo.luka;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Set;
 
 public class SiteConfig {
+    Logger logger = LoggerFactory.getLogger(SiteConfig.class);
     private String bodyPattern;
     private Set<String> adPatterns;
     private String link;
@@ -23,11 +27,13 @@ public class SiteConfig {
 
     public void setBodyPattern(String bodyPattern) {
         this.bodyPattern = bodyPattern;
+        logger.info("Body pattern added successfully");
     }
 
 
     public void setAdPatterns(Set<String> adPatterns) {
         this.adPatterns = adPatterns;
+        logger.info("ad pattern added successfully");
     }
 
     public void addAdPattern(String adPattern){
