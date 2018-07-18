@@ -14,7 +14,7 @@ public class HTMLParserTest {
         properties.load(this.getClass().getClassLoader().getResourceAsStream("./HTMLParserTest.txt"));
         URL url = new URL(properties.get("TABNAK_NEWS_URL").toString());
         SiteConfig config = new SiteConfig(".gutter_news > div.body",null);
-        String context = htmlParse.parse(url,config);
+        String context = htmlParse.getContext(url,config);
         System.out.println(properties.get("TABNAK_NEWS_CONTEXT").toString());
         //assertEquals(properties.get("TABNAK_NEWS_CONTEXT").toString(), context);
         assertTrue(context.contains("مذاکره با آمریکا"));

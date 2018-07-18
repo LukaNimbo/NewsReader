@@ -5,7 +5,7 @@ import java.net.URL;
 
 /**
  * we used Jsoup library that give this possibility
- * to us to get html file of a site and parse that
+ * to us to get html file of a site and getContext that
  * with given css query selector
  *
  * @author nadi
@@ -15,6 +15,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * HTMLParser Class, get a URL and a SiteConfig and then
@@ -25,6 +27,9 @@ import org.jsoup.select.Elements;
  */
 
 public class HTMLParser {
+
+    Logger logger = LoggerFactory.getLogger(HTMLParser.class);
+
 
     public HTMLParser(){
 
@@ -41,22 +46,25 @@ public class HTMLParser {
      * @author nadi
      */
 
-    public String parse(URL url, SiteConfig config) {
+    public String getContext(URL url, SiteConfig config) {
         Document document = null;
         try {
             document = Jsoup.connect(url.toString()).get();
+            logger.info("Jsoup connect to site and read HTML successfully.");
         } catch (IOException e) {
             e.printStackTrace();
+            logger.debug("Jsoup can't read HTML of site",e);
         }
 
         Elements newsPara = document.select(config.getBodyPattern());
 
-        String context = "";
+        //String context = "";
+        StringBuilder context = new StringBuilder("");
 
         for (Element newsPar : newsPara) {
-            context += (newsPar.text()+"\n");
+            context.append (newsPar.text()+"\n");
         }
 
-        return context;
+        return context.toString();
     }
 }

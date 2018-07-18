@@ -50,7 +50,7 @@ public class RSSParser {
             item.setPubDate(syndEntry.getPublishedDate());
 
             try {
-                item.setContext(HTMLParser.parse(new URL(item.getLink()), config));
+                item.setContext(HTMLParser.getContext(new URL(item.getLink()), config));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
