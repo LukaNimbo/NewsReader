@@ -66,4 +66,13 @@ public class Channel {
     public void setItems(List<Item> items) {
         this.items = items;
     }
+
+    @Override
+    public String toString(){
+        return String.format(
+                "id: " + id + " " +
+                "title: " + title + " " +
+                "link: " + link + " " +
+                "description: " + description + " ");
+    }
 }
