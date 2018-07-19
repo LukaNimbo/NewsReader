@@ -45,6 +45,7 @@ public class Console {
         }
         else {
             logger.trace("User get null Config for link: "+link);
+            return "There is no Config for this link";
         }
     }
 
