@@ -1,5 +1,6 @@
 package in.nimbo.luka;
 
+import asg.cliche.ShellFactory;
 import in.nimbo.luka.database.HikariConnectionPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,16 @@ public class NewsReader {
 
     public void initialize(){
         setupDB();
+        setupConsole();
+    }
+
+    private void setupConsole() {
+        try {
+            ShellFactory.createConsoleShell("RSS Reader", "Enter '?list' to list all commands",
+                    new Console()).commandLoop();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setupDB() {
