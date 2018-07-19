@@ -34,7 +34,4 @@ public class SiteConfig {
         this.bodyPattern = bodyPattern;
         logger.info("Body pattern added successfully");
     }
-
-
-
 }
