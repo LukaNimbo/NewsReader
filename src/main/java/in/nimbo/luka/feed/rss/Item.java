@@ -14,7 +14,7 @@ public class Item {
     private Date pubDate;
     private String description;
     private String context;
-    private String channelId;
+    private int channelId;
 
 
     public int getId() {
@@ -71,11 +71,11 @@ public class Item {
     }
 
 
-    public String getChannelId() {
+    public int getChannelId() {
         return channelId;
     }
 
-    public void setChannelId(String channelId) {
+    public void setChannelId(int channelId) {
         this.channelId = channelId;
     }
 }
