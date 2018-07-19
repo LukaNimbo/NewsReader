@@ -28,7 +28,7 @@ public class RSSParser {
         HTMLParser = new HTMLParser();
     }
 
-    public Channel parse(URL url, SiteConfig siteConfig) {
+    public Channel getChannel(URL url, String bodyPattern) {
 
         SyndFeedInput input = new SyndFeedInput();
         SyndFeed feed = null;
@@ -43,14 +43,18 @@ public class RSSParser {
             logger.debug("Get feed of rss site has exception ",e);
         }
         Channel channel = new Channel();
+
         logger.info("Make new channel successfully.");
-        channel.setName(url.getHost());
+        channel.setId(-1);
         logger.info("Set channel name successfully.");
-        channel.setUrl(url);
+
+        channel.setTitle(feed.getTitle());
+
+        channel.setLink(url.toString());
         logger.info("Set channel url successfully.");
         channel.setDescription(feed.getDescription());
         logger.info("Set channel description successfully.");
-
+        channel.setSiteConfigId(-1);
 
         List<Item> items = new ArrayList<>();
         for (SyndEntry syndEntry: feed.getEntries()){
@@ -61,7 +65,7 @@ public class RSSParser {
             item.setPubDate(syndEntry.getPublishedDate());
 
             try {
-                item.setContext(HTMLParser.getContext(new URL(item.getLink()), siteConfig));
+                item.setContext(HTMLParser.getContext(new URL(item.getLink()), bodyPattern));
                 logger.info("Item set context successfully");
             } catch (MalformedURLException e) {
                 e.printStackTrace();
