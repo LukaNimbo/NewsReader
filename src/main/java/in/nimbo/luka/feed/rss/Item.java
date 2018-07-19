@@ -8,13 +8,22 @@ import java.util.Date;
  * @author reza
  */
 public class Item {
+    private int id;
     private String title;
     private String link;
     private Date pubDate;
     private String description;
     private String context;
-    private String pubID;
+    private String channelId;
 
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
 
     public String getTitle() {
@@ -62,13 +71,14 @@ public class Item {
     }
 
 
-    public String getPubID() {
-        return pubID;
+    public String getChannelId() {
+        return channelId;
     }
 
-    public void setPubID(String pubID) {
-        this.pubID = pubID;
+    public void setChannelId(String channelId) {
+        this.channelId = channelId;
     }
 }
+
 
 
