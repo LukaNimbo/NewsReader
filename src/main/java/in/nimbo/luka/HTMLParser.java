@@ -39,14 +39,14 @@ public class HTMLParser {
      *
      * @param url is link of one news of News Site that we want to
      *            get the context of that.
-     * @param config is unique file that defines where we search the
+     * @param bodyPattern is unique file that defines where we search the
      *               context of news in the html file of site.
      * @return context of a news of site
      *
      * @author nadi
      */
 
-    public String getContext(URL url, SiteConfig config) {
+    public String getContext(URL url, String bodyPattern) {
         Document document = null;
         try {
             document = Jsoup.connect(url.toString()).get();
@@ -56,7 +56,7 @@ public class HTMLParser {
             logger.debug("Jsoup can't read HTML of site",e);
         }
 
-        Elements newsPara = document.select(config.getBodyPattern());
+        Elements newsPara = document.select(bodyPattern);
 
         //String context = "";
         StringBuilder context = new StringBuilder("");
