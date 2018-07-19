@@ -17,8 +17,8 @@ public class Console {
         siteConfigDAO = new SiteConfigMysqlIpml();
     }
 
-    @Command
-    public void addConfig(String link, String bodyPattern){
+    @Command(description = "Tell how extract news context by bodyPattern of site")
+    public void addConfig(@Param(name = "link") String link, @Param(name = "bodyPattern") String bodyPattern){
         SiteConfig siteConfig = new SiteConfig(-1, link, bodyPattern);
 
         try {
@@ -26,31 +26,31 @@ public class Console {
             logger.info("addConfig of Console.java work successfully!");
         } catch (SQLException e) {
             e.printStackTrace();
-            logger.debug("SQL Exception in addConfig of Console.java",e);
+            logger.debug("SQL Exception in addConfig of Console.java", e);
         }
     }
 
-    @Command
-    public String getConfig(String link){
+    @Command(description = "Get config of site")
+    public String getConfig(@Param(name = "link") String link){
         SiteConfig siteConfig = null;
         try {
             siteConfig = siteConfigDAO.getConfig(link);
             logger.info("getConfig of Console.java work successfully!");
         } catch (SQLException e) {
             e.printStackTrace();
-            logger.debug("SQL Exception in getConfig of Console.java",e);
+            logger.debug("SQL Exception in getConfig of Console.java", e);
         }
         if (siteConfig != null) {
             return siteConfig.getBodyPattern();
         }
         else {
-            logger.trace("User get null Config for link: "+link);
+            logger.trace("User get null Config for link: " + link);
             return "There is no Config for this link";
         }
     }
 
-    @Command
-    public void updateConfig(int id, String link, String bodyPattern){
+    @Command(description = "Update bodyPattern of site with id")
+    public void updateConfig(@Param(name = "id") int id, @Param(name = "link") String link, @Param(name = "bodyPattern") String bodyPattern){
         SiteConfig siteConfig = new SiteConfig(id, link, bodyPattern);
         try {
             siteConfigDAO.updateConfig(siteConfig);
