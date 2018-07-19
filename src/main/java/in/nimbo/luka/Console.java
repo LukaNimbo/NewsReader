@@ -40,7 +40,12 @@ public class Console {
             e.printStackTrace();
             logger.debug("SQL Exception in getConfig of Console.java",e);
         }
-        return siteConfig.getBodyPattern();
+        if (siteConfig != null) {
+            return siteConfig.getBodyPattern();
+        }
+        else {
+            logger.trace("User get null Config for link: "+link);
+        }
     }
 
     @Command
