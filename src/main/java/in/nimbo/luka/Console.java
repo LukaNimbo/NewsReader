@@ -1,20 +1,32 @@
 package in.nimbo.luka;
 
+import in.nimbo.luka.database.dao.implementation.RSSItemsMysqlImpl;
+import in.nimbo.luka.database.dao.implementation.SiteChannelMysqlImpl;
 import in.nimbo.luka.database.dao.implementation.SiteConfigMysqlIpml;
+import in.nimbo.luka.database.dao.interfaces.RSSItemsDAO;
+import in.nimbo.luka.database.dao.interfaces.SiteChannelDAO;
 import in.nimbo.luka.database.dao.interfaces.SiteConfigDAO;
+import in.nimbo.luka.feed.rss.Channel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import asg.cliche.*;
 
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
 
 public class Console {
 
     private SiteConfigDAO siteConfigDAO;
+    private SiteChannelDAO siteChannelDAO;
+    private RSSItemsDAO rssItemsDAO;
     private final static Logger logger = LoggerFactory.getLogger(Console.class);
     public Console(){
-        siteConfigDAO = new SiteConfigMysqlIpml();
+        this.siteConfigDAO = new SiteConfigMysqlIpml();
+        this.siteChannelDAO = new SiteChannelMysqlImpl();
+        this.rssItemsDAO = new RSSItemsMysqlImpl();
+
     }
 
     @Command(description = "Tell how extract news context by bodyPattern of site")
@@ -54,10 +66,60 @@ public class Console {
         SiteConfig siteConfig = new SiteConfig(id, link, bodyPattern);
         try {
             siteConfigDAO.updateConfig(siteConfig);
-            logger.info("updtaeConfig of Console.java work successfully!");
+            logger.info("updateConfig of Console.java work successfully!");
         } catch (SQLException e) {
             e.printStackTrace();
             logger.debug("SQL Exception in updateConfig of Console.java",e);
         }
     }
+
+    @Command(description = "Latest news of site")
+    public void getNews(@Param(name = "quantity") int quantity,
+                        @Param(name = "channelId") int channelId,
+                        @Param(name = "date{year:month:day | now}") String date){
+
+
+
+    }
+
+    public void getQuantityNews(@Param(name = "channelId") int channelId, @Param(name = "date{year:month:day | now}") String da){
+
+
+    }
+
+    @Command(description = "Show channels details")
+    public void showChannels(){
+        List<Channel> channels = null;
+        try {
+            channels = siteChannelDAO.getAllChannels();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (channels == null){
+            //TODO: show message about invalid query
+        }
+        if (channels.isEmpty()){
+            //TODO: show message about channels is empty
+            System.out.println("empty");
+        }
+        for (Channel channel: channels){
+            System.out.println(channel.toString());
+        }
+    }
+
+    public void showItems(){
+    }
+
+    @Command(description = "Search text in title and context of news")
+    public void search(){
+
+    }
+
+    public void exit(@Param(name = "exit") String exit){
+        System.exit(0);
+    }
+
+
+
 }
