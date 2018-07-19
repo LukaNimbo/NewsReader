@@ -16,7 +16,7 @@ public interface RSSItemsDAO {
 
     Item getItemById(int itemId) throws SQLException;
 
-    List<Item> getLatestNews(int quantity, int channelId, Date date) throws SQLException;
+    List<Item> getNews(int quantity, int channelId, Date date) throws SQLException;
 
 
 }
