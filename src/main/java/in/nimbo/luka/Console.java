@@ -31,19 +31,21 @@ public class Console {
     }
 
     @Command
-    public void getConfig(String link){
+    public String getConfig(String link){
+        SiteConfig siteConfig = null;
         try {
-            siteConfigDAO.getConfig(link);
+            siteConfig = siteConfigDAO.getConfig(link);
             logger.info("getConfig of Console.java work successfully!");
         } catch (SQLException e) {
             e.printStackTrace();
             logger.debug("SQL Exception in getConfig of Console.java",e);
         }
+        return siteConfig.getBodyPattern();
     }
 
     @Command
-    public void updateConfig(String link, String bodyPattern){
-        SiteConfig siteConfig = new SiteConfig(-1, link, bodyPattern);
+    public void updateConfig(int id, String link, String bodyPattern){
+        SiteConfig siteConfig = new SiteConfig(id, link, bodyPattern);
         try {
             siteConfigDAO.updateConfig(siteConfig);
             logger.info("updtaeConfig of Console.java work successfully!");
