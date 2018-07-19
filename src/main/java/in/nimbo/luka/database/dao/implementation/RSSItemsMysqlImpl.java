@@ -67,8 +67,8 @@ public class RSSItemsMysqlImpl implements RSSItemsDAO {
     }
 
     @Override
-    public List<Item> getLatestNews(int quantity, int channelId, Date date) throws SQLException {
-        
+    public List<Item> getNews(int quantity, int channelId, Date date) throws SQLException {
+
         List<Item> items = new ArrayList<>();
         Connection connection = HikariConnectionPool.getInstance().getConnection();
         String getLatestNewsQuery = "SELECT rss_items.id, rss_items.title, rss_items.link, rss_items.pubDate, rss_items.description, rss_items.context, rss_items.site_channel_id " +
