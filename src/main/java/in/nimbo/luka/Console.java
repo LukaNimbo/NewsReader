@@ -7,13 +7,13 @@ import in.nimbo.luka.database.dao.interfaces.RSSItemsDAO;
 import in.nimbo.luka.database.dao.interfaces.SiteChannelDAO;
 import in.nimbo.luka.database.dao.interfaces.SiteConfigDAO;
 import in.nimbo.luka.feed.rss.Channel;
+import in.nimbo.luka.feed.rss.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import asg.cliche.*;
 
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
 public class Console {
@@ -30,7 +30,7 @@ public class Console {
     }
 
     @Command(description = "Tell how extract news context by bodyPattern of site")
-    public void addConfig(@Param(name = "link") String link, @Param(name = "bodyPattern") String bodyPattern){
+    public void addSiteConfig(@Param(name = "link") String link, @Param(name = "bodyPattern") String bodyPattern){
         SiteConfig siteConfig = new SiteConfig(-1, link, bodyPattern);
 
         try {
@@ -43,7 +43,7 @@ public class Console {
     }
 
     @Command(description = "Get config of site")
-    public String getConfig(@Param(name = "link") String link){
+    public String getSiteConfig(@Param(name = "link") String link){
         SiteConfig siteConfig = null;
         try {
             siteConfig = siteConfigDAO.getConfig(link);
@@ -62,7 +62,7 @@ public class Console {
     }
 
     @Command(description = "Update bodyPattern of site with id")
-    public void updateConfig(@Param(name = "id") int id, @Param(name = "link") String link, @Param(name = "bodyPattern") String bodyPattern){
+    public void updateSiteConfig(@Param(name = "id") int id, @Param(name = "link") String link, @Param(name = "bodyPattern") String bodyPattern){
         SiteConfig siteConfig = new SiteConfig(id, link, bodyPattern);
         try {
             siteConfigDAO.updateConfig(siteConfig);
@@ -77,13 +77,56 @@ public class Console {
     public void getNews(@Param(name = "quantity") int quantity,
                         @Param(name = "channelId") int channelId,
                         @Param(name = "date{year:month:day | now}") String date){
-
-
-
     }
 
     public void getQuantityNews(@Param(name = "channelId") int channelId, @Param(name = "date{year:month:day | now}") String da){
 
+    }
+
+    @Command(description = "get latest news of each agencies")
+    public void getLastestNewsOfEachAgency(@Param(name = "quantity")int quantity){
+        List<Channel> channels = null;
+        try {
+            channels = siteChannelDAO.getAllChannels();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        for (Channel channel: channels){
+            List<Item> items = null;
+            try {
+                items = rssItemsDAO.getNews(quantity, channel.getId());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            for (Item item: items){
+                System.out.println(item.toString());
+            }
+        }
+    }
+
+
+    @Command(description = "Show channels details")
+    public void showAgnecies(){
+        List<SiteConfig> siteConfigs = null;
+        try {
+            siteConfigs = siteConfigDAO.getSiteConfigs();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (siteConfigs == null){
+            //TODO: show message about invalid query
+        }
+        if (siteConfigs.isEmpty()){
+            //TODO: show message about channels is empty
+            System.out.println("empty");
+        }
+        for (SiteConfig siteConfig: siteConfigs){
+            System.out.println(siteConfig.toString());
+        }
 
     }
 
@@ -108,18 +151,59 @@ public class Console {
         }
     }
 
+    @Command(description = "Get all items")
     public void showItems(){
+        List<Item> items = null;
+        try {
+            items = rssItemsDAO.getItems();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        for (Item item: items){
+            System.out.println(item.toString());
+
+        }
+
     }
 
-    @Command(description = "Search text in title and context of news")
-    public void search(){
+    @Command(description = "Search text in context of news")
+    public void searchInContext(@Param(name = "phrase") String phrase){
+        List<Item> items = null;
+        try {
+            items = rssItemsDAO.searchInContext(phrase);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        for (Item item: items){
+            System.out.println(item.toString());
+
+        }
 
     }
 
-    public void exit(@Param(name = "exit") String exit){
+    @Command(description = "Search text in title of news")
+    public void searchInTitle(@Param(name = "phrase") String phrase){
+
+        List<Item> items = null;
+        try {
+            items = rssItemsDAO.searchInTitle(phrase);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        for (Item item: items){
+            System.out.println(item.toString());
+
+        }
+
+    }
+
+    @Command(description = "Exit")
+    public void exit(){
         System.exit(0);
     }
-
-
 
 }
