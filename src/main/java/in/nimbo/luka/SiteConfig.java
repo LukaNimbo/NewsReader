@@ -34,4 +34,13 @@ public class SiteConfig {
         this.bodyPattern = bodyPattern;
         logger.info("Body pattern added successfully");
     }
+
+    @Override
+    public String toString(){
+        return String.format(
+                "id: " + id + " " +
+                        "link: " + link + " " +
+                        "bodyPattern: " + bodyPattern
+        );
+    }
 }
