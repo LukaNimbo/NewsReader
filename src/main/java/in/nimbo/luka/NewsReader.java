@@ -29,7 +29,7 @@ public class NewsReader {
 
     private void setupConsole() {
         try {
-            ShellFactory.createConsoleShell("RSS Reader", "Enter '?list' to list all commands",
+            ShellFactory.createConsoleShell("client", "NewsReader", "?list show commands",
                     new Console()).commandLoop();
         } catch (IOException e) {
             e.printStackTrace();
