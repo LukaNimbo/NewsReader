@@ -16,7 +16,19 @@ public interface RSSItemsDAO {
 
     Item getItemById(int itemId) throws SQLException;
 
+    List<Item> getItems() throws SQLException;
+
+    List<Item> getNews(int quantity, int channelId) throws SQLException;
+
     List<Item> getNews(int quantity, int channelId, Date date) throws SQLException;
 
+
+    List<Item> getNewsInDay(int channelId, Date startDate) throws SQLException;
+
+    List<Item> searchInContext(String phrase) throws SQLException;
+
+    List<Item> searchInTitle(String phrase) throws SQLException;
+
+    List<String> getLatestNewsOfAgencies() throws SQLException;
 
 }
