@@ -1,6 +1,5 @@
 package in.nimbo.luka.feed.rss;
 
-import java.net.URL;
 import java.util.List;
 
 /**
