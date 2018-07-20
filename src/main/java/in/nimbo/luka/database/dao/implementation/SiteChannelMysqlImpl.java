@@ -3,11 +3,9 @@ package in.nimbo.luka.database.dao.implementation;
 import in.nimbo.luka.database.HikariConnectionPool;
 import in.nimbo.luka.database.dao.interfaces.SiteChannelDAO;
 import in.nimbo.luka.feed.rss.Channel;
+import in.nimbo.luka.feed.rss.Item;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,14 +51,41 @@ public class SiteChannelMysqlImpl implements SiteChannelDAO {
             channel.setLink(resultSet.getString("link"));
             channel.setDescription(resultSet.getString("description"));
             channel.setSiteConfigId(resultSet.getInt("site_config_id"));
-            //TODO: get Items of this channel
-            //channel.setItems();s
+            channel.setItems(getItems(channelId));
         }else{
             //TODO: config not found
         }
         return channel;
 
     }
+
+    private List<Item> getItems(int channelId) throws SQLException {
+        List<Item> items = new ArrayList<>();
+        Connection connection = HikariConnectionPool.getInstance().getConnection();
+        String getLatestNewsQuery = "SELECT rss_items.id, rss_items.title, rss_items.link, rss_items.pubDate, rss_items.description, rss_items.context, rss_items.site_channel_id " +
+                "FROM site_channel, rss_items " +
+                "WHERE site_channel.id = rss_items.site_channel_id and site_channel.id = ?;";
+        PreparedStatement preparedStatement = connection.prepareStatement(getLatestNewsQuery);
+
+        ;
+        ResultSet resultSet = preparedStatement.executeQuery();
+        preparedStatement.setInt(1, channelId);
+
+        while (resultSet.next()){
+            Item item = new Item();
+            item.setId(resultSet.getInt("id"));
+            item.setTitle(resultSet.getString("title"));
+            item.setLink(resultSet.getString("link"));
+            item.setPubDate(resultSet.getTimestamp("pubDate"));
+            item.setDescription(resultSet.getString("description"));
+            item.setContext(resultSet.getString("context"));
+            item.setChannelId(resultSet.getInt("site_channel_id"));
+            items.add(item);
+        }
+        return items;
+    }
+
+
 
     @Override
     public int getChannelId(String link) throws SQLException {
@@ -82,15 +107,20 @@ public class SiteChannelMysqlImpl implements SiteChannelDAO {
     @Override
     public List<Channel> getAllChannels() throws SQLException {
         List<Channel> channels = new ArrayList<>();
-//        Connection connection= HikariConnectionPool.getInstance().getConnection();
-//        String getAllChannelsIdQuery =  "SELECT * FROM site_channel;";
-//        PreparedStatement preparedStatement = connection.prepareStatement(getAllChannelsIdQuery);
-//        ResultSet resultSet = preparedStatement.executeQuery();
-//        while (resultSet.next()){
-//            Channel channel = new Channel();
-//            //TODO: filed of channel not set
-//            channels.add(channel);
-//        }
+        Connection connection= HikariConnectionPool.getInstance().getConnection();
+        String getAllChannelsIdQuery =  "SELECT * FROM site_channel;";
+        PreparedStatement preparedStatement = connection.prepareStatement(getAllChannelsIdQuery);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()){
+            Channel channel = new Channel();
+            channel.setId(resultSet.getInt("id"));
+            channel.setTitle(resultSet.getString("title"));
+            channel.setLink(resultSet.getString("link"));
+            channel.setDescription(resultSet.getString("description"));
+            channel.setSiteConfigId(resultSet.getInt("site_config_id"));
+            channel.setItems(getItems(resultSet.getInt("id")));
+            channels.add(channel);
+        }
 
         return channels;
     }
