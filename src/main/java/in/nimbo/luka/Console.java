@@ -94,6 +94,7 @@ public class Console {
 
 
         for (Channel channel: channels){
+            System.out.println(channel.toString() + "  -> ");
             List<Item> items = null;
             try {
                 items = rssItemsDAO.getNews(quantity, channel.getId());
@@ -104,6 +105,7 @@ public class Console {
             for (Item item: items){
                 System.out.println(item.toString());
             }
+            System.out.println("\n");
         }
     }
 
