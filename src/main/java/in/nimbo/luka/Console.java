@@ -13,7 +13,10 @@ import org.slf4j.LoggerFactory;
 
 import asg.cliche.*;
 
+import javax.xml.crypto.Data;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class Console {
@@ -74,13 +77,30 @@ public class Console {
     }
 
     @Command(description = "Latest news of site")
-    public void getNews(@Param(name = "quantity") int quantity,
+    public void getQuantityNews(@Param(name = "quantity") int quantity,
                         @Param(name = "channelId") int channelId,
                         @Param(name = "date{year:month:day | now}") String date){
-    }
 
-    public void getQuantityNews(@Param(name = "channelId") int channelId, @Param(name = "date{year:month:day | now}") String da){
+        String[] dateInput = date.split(":");
+        Date date1 = new Date();
 
+        Calendar calendar = Calendar.getInstance();
+
+        if (dateInput[0].equals("now")){
+
+        }else if (dateInput.length == 3){
+            calendar.set(Integer.parseInt(dateInput[0]), Integer.parseInt(dateInput[1]) - 1, Integer.parseInt(dateInput[2]));
+            date1 = calendar.getTime();
+            try {
+                int numberOfNews = rssItemsDAO.getNewsInDay(channelId, date1).size();
+                System.out.println(numberOfNews);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }else {
+            System.out.println("Invalid input for date");
+        }
     }
 
     @Command(description = "get latest news of each agencies")
@@ -108,6 +128,7 @@ public class Console {
             System.out.println("\n");
         }
     }
+
 
 
     @Command(description = "Show channels details")
