@@ -78,6 +78,19 @@ public class Item {
     public void setChannelId(int channelId) {
         this.channelId = channelId;
     }
+
+    @Override
+    public String toString(){
+        return String.format(
+                "id: " + id + " " +
+                        "title: " + title + " " +
+                        "link: " + link + " " +
+                        "pubDate" + pubDate + " " +
+                        "description: " + description + " " +
+                        "context" + context + " " +
+                        "channelId" + channelId
+        );
+    }
 }
 
 
