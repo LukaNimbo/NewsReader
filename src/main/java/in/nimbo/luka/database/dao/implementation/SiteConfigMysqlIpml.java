@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SiteConfigMysqlIpml implements SiteConfigDAO {
 
@@ -47,5 +49,22 @@ public class SiteConfigMysqlIpml implements SiteConfigDAO {
         preparedStatement.setInt(2, siteConfig.getId());
         preparedStatement.setString(3, siteConfig.getLink());
         preparedStatement.executeUpdate();
+    }
+
+    @Override
+    public List<SiteConfig> getSiteConfigs() throws SQLException {
+        List<SiteConfig> siteConfigs = new ArrayList<>();
+        Connection connection = HikariConnectionPool.getInstance().getConnection();
+        String getSiteConfigsQuery =   "SELECT * FROM site_config;";
+        PreparedStatement preparedStatement = connection.prepareStatement(getSiteConfigsQuery);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()){
+            SiteConfig siteConfig = new SiteConfig(resultSet.getInt("id"), resultSet.getString("link"), resultSet.getString("bodyPattern"));
+            siteConfigs.add(siteConfig);
+        }
+
+        return siteConfigs;
+
     }
 }
