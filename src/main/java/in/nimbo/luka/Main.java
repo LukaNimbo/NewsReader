@@ -4,7 +4,7 @@ import asg.cliche.*;
 
 import java.io.IOException;
 
-public class App {
+public class Main {
     public static void main( String[] args ) throws IOException {
         NewsReader newsReader = new NewsReader();
         newsReader.initialize();
