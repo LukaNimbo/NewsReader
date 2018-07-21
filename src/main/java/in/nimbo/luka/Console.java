@@ -77,9 +77,7 @@ public class Console {
     }
 
     @Command(description = "Latest news of site")
-    public void getQuantityNews(@Param(name = "quantity") int quantity,
-                        @Param(name = "channelId") int channelId,
-                        @Param(name = "date{year:month:day | now}") String date){
+    public void getQuantityNews(@Param(name = "quantity") int quantity, @Param(name = "channelId") int channelId, @Param(name = "date{year:month:day | now}") String date){
 
         String[] dateInput = date.split(":");
         Date date1 = new Date();
@@ -128,8 +126,6 @@ public class Console {
             System.out.println("\n");
         }
     }
-
-
 
     @Command(description = "Show channels details")
     public void showAgnecies(){
