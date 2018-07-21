@@ -42,6 +42,8 @@ public class Console {
         } catch (SQLException e) {
             e.printStackTrace();
             logger.debug("SQL Exception in addConfig of Console.java", e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -54,6 +56,8 @@ public class Console {
         } catch (SQLException e) {
             e.printStackTrace();
             logger.debug("SQL Exception in getConfig of Console.java", e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         if (siteConfig != null) {
             return siteConfig.getBodyPattern();
@@ -73,6 +77,8 @@ public class Console {
         } catch (SQLException e) {
             e.printStackTrace();
             logger.debug("SQL Exception in updateConfig of Console.java",e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -94,6 +100,8 @@ public class Console {
                 System.out.println(numberOfNews);
             } catch (SQLException e) {
                 e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
         }else {
@@ -108,6 +116,8 @@ public class Console {
             channels = siteChannelDAO.getAllChannels();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
 
@@ -117,6 +127,8 @@ public class Console {
             try {
                 items = rssItemsDAO.getNews(quantity, channel.getId());
             } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -133,6 +145,8 @@ public class Console {
         try {
             siteConfigs = siteConfigDAO.getSiteConfigs();
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -156,6 +170,8 @@ public class Console {
             channels = siteChannelDAO.getAllChannels();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         if (channels == null){
@@ -177,6 +193,8 @@ public class Console {
             items = rssItemsDAO.getItems();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         for (Item item: items){
@@ -192,6 +210,8 @@ public class Console {
         try {
             items = rssItemsDAO.searchInContext(phrase);
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -209,6 +229,8 @@ public class Console {
         try {
             items = rssItemsDAO.searchInTitle(phrase);
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
